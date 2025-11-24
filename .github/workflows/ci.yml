@@ -24,6 +24,7 @@ jobs:
         with:
           name: extension chrome
           path: .output/
+          include-hidden-files: true
 
       - name: clear output
         run: rm -rf .output/
@@ -36,3 +37,4 @@ jobs:
         with:
           name: extension firefox
           path: .output/
+          include-hidden-files: true
