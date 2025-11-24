@@ -1,0 +1,35 @@
+name: create extension artefact
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+
+jobs:
+  create_artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v5
+
+      - name: create chrome artifact
+        runs: npm run build
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension chrome
+          path: ./.output
+
+      - name: clear ./output
+        runs: rm -rf ./.output
+
+      - name: create firefox artifact
+        runs: npm run build:firefox
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension firefox
+          path: ./.output
